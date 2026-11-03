@@ -1,0 +1,12 @@
+# .venv (Python 3.12): pipeline + GAME + demucs
+torch
+lightning
+demucs
+librosa
+music21
+pretty_midi
+soundfile
+numpy<2
+# GAME's own requirements: pip install -r work/models/GAME/requirements.txt
+# .venv-sep (separate env, Python 3.12): pip install "audio-separator[cpu]" audioread
+# stems_bp.py only: basic-pitch (needs Python 3.11)

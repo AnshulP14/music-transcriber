@@ -1,0 +1,10 @@
+# per-song material stays local: audio, reference notes, stems, GAME runs, generated scores
+songs/*
+!songs/example/
+# downloaded models (GAME repo + checkpoint, karaoke separator)
+models/
+# Python environments
+.venv/
+.venv-sep/
+__pycache__/
+.DS_Store
