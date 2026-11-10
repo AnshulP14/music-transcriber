@@ -39,10 +39,11 @@ songs/<name>/
 ## Run
 
 ```bash
+./run.sh <name> fetch "song title artist"
 ./run.sh <name> all
 ```
 
-That runs everything from the recording. Other forms:
+`fetch` downloads the first YouTube match (or a URL you pass) with yt-dlp into `source/song.mp3`. Downloading from YouTube goes against its terms, so you can drop in your own file instead. `all` runs everything from the recording. Other forms:
 
 - `./run.sh <name>` rebuilds the score from `work/` in about a minute.
 - `./run.sh <name> <stage>` runs one stage: `audio` `stems` `beats` `game` `melody` `accomp` `score` `check`.
@@ -82,7 +83,11 @@ That runs everything from the recording. Other forms:
   pip install "audio-separator[cpu]" audioread
   ```
 
-- **basic-pitch** for `stems_bp.py` needs a Python 3.11 env.
+- **`.venv-bp`** (Python 3.11) runs basic-pitch for `stems_bp.py`:
+
+  ```bash
+  pip install basic-pitch music21 "setuptools<81"
+  ```
 
 Models go in `models/` (gitignored):
 
