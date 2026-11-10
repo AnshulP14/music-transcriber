@@ -12,6 +12,7 @@ SONG = json.load(open(SONG_DIR / 'song.json'))
 SEP = WORK / 'sep'
 VOCALS = SEP / 'htdemucs/song/vocals.wav'
 STEM = lambda name: SEP / f'htdemucs_6s/song/{name}.wav'
+BASS = WORK / 'bass.wav'  # bass stem, plus the guitar stem's low band when Demucs filed the bass under guitar (written by stems_bp.py)
 
 SHARP = ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B']
 FLAT = ['C', 'D-', 'D', 'E-', 'E', 'F', 'G-', 'G', 'A-', 'A', 'B-', 'B']

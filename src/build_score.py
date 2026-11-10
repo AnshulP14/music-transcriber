@@ -1,14 +1,14 @@
 """Score (melody, 2nd voice, piano RH/LH) as MusicXML + MIDI, the note-by-note CSV and the two check mixes -> out/."""
 import csv, numpy as np, librosa, warnings; warnings.filterwarnings('ignore')
 from music21 import stream, note, chord, meter, key, tempo, metadata, harmony, clef, layout
-from common import OUT, STEM, SONG, KEY, SHARP, CHORD_ROOT, Grid, chord_tones, pitch_name, load, check_mix
+from common import OUT, STEM, BASS, SONG, KEY, SHARP, CHORD_ROOT, Grid, chord_tones, pitch_name, load, check_mix
 
 grid = Grid(); M = load('melody.json'); q = M['q']; A = load('accomp.json'); bass, chords = A['bass'], A['chords']; nbars = grid.nbars
 triad = lambda c: sorted(65 + ((pc - 65) % 12) for pc in chord_tones(c))  # close voicing around F4-E5, so hands barely move
 low = lambda pc: 39 + ((pc - 39) % 12)  # bass register D#2-D3
 
 # bars where the bass really plays (within 20 dB of its loudest bar) get the groove; quiet bars get held chords
-yb, _ = librosa.load(STEM('bass'), sr=22050)
+yb, _ = librosa.load(BASS if BASS.exists() else STEM('bass'), sr=22050)
 rms = [float(np.sqrt(np.mean(yb[int(grid.time(16 * b) * 22050):int(grid.time(16 * b + 16) * 22050)] ** 2))) for b in range(nbars)]
 band = [rms[b] >= max(rms) * 0.1 and sum(b * 16 <= a < b * 16 + 16 for a, _, _ in bass) >= 2 for b in range(nbars)]
 print('quiet bars', [b + 1 for b in range(nbars) if not band[b]])
